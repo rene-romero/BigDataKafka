@@ -1,2 +1,2 @@
 # BigDataKafka
-Repository to build a KafkaProject.
+Repository to build a Kafka Project.
