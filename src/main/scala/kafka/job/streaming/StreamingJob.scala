@@ -101,8 +101,7 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
           col("total_minor_injuries").cast(IntegerType),
           col("total_uninjured").cast(IntegerType),
           col("weather_condition").cast(StringType),
-          col("broad_phase_of_flight").cast(StringType),
-          col("report_status").cast(StringType),
+          col("broad_phase_of_flight").cast(StringType)
         )
 
         val df_2 = batchDF.select(
@@ -121,7 +120,7 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
           col("amateur_built").cast(StringType),
           col("number_of_engines").cast(IntegerType),
           col("engine_type").cast(StringType),
-          col("purpose_of_flight").cast(StringType),
+          col("purpose_of_flight").cast(StringType)
         )
 
         df_1
@@ -131,7 +130,7 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
           .option("user", jdbcConfig.user)
           .option("password", jdbcConfig.password)
           .option("driver", "org.postgresql.Driver")
-          .option(JDBCOptions.JDBC_TABLE_NAME, "df_1")
+          .option(JDBCOptions.JDBC_TABLE_NAME, "quantitative_table")
           //.option("StringType", "unspecified")
           .mode(SaveMode.Append)
           .save()
@@ -143,7 +142,7 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
           .option("user", jdbcConfig.user)
           .option("password", jdbcConfig.password)
           .option("driver", "org.postgresql.Driver")
-          .option(JDBCOptions.JDBC_TABLE_NAME, "df_2")
+          .option(JDBCOptions.JDBC_TABLE_NAME, "qualitative_table")
           //.option("StringType", "unspecified")
           .mode(SaveMode.Append)
           .save()

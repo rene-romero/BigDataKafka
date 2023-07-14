@@ -66,9 +66,7 @@ class StreamingJobExecutor_1(spark: SparkSession, KafkaReaderConfig_1: KafkaRead
       split(col("value"), ",").getItem(26).as("total_minor_injuries"),
       split(col("value"), ",").getItem(27).as("total_uninjured"),
       split(col("value"), ",").getItem(28).as("weather_condition"),
-      split(col("value"), ",").getItem(29).as("broad_phase_of_flight"),
-      split(col("value"), ",").getItem(30).as("report_status"),
-      split(col("value"), ",").getItem(31).as("publication_date")
+      split(col("value"), ",").getItem(29).as("broad_phase_of_flight")
     )
 
     transformDF_2

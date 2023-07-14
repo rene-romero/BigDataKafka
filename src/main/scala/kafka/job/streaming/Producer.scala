@@ -24,7 +24,7 @@ object KafkaCsvProducer {
     val producer: KafkaProducer[String, String] = new KafkaProducer[String, String](config)
 
     //file name with path
-    val fileName = "src/main/resources/dataset/AviationData.csv"
+    val fileName = "src/main/resources/dataset/AviationDataQuery.csv"
 
     //Kafka input topic name
     val topicName = "csv_to_mysql"
