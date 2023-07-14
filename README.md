@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PROJECT KAFKA - CDELACRUZ
 
 ## Dataset
