@@ -38,8 +38,6 @@ Adminer
 
 Check the file docker-compose.yaml for more Details.
 
-
-
 ![Untitled](./img/2.png)
 
 
@@ -71,7 +69,7 @@ val fileName = "src/main/resources/dataset/AviationData.csv"
 val topicName = "csv_to_mysql"
 
 //Dropping the column names
-for (line <- Source.fromFile(fileName).getLines().drop(1))
+for (line <- Source.fromFile(fileName).getLines().drop(1)){}
 ```
 
 
