@@ -12,7 +12,7 @@ trait SparkSessionWrapper {
   */
   lazy val spark: SparkSession = SparkSession
     .builder
-    .appName("Testing")
+    .appName("BigDataKafka")
     .master("local[*]")
     //to fix issue of port assignment on local
     .config("spark.driver.bindAddress", "localhost")

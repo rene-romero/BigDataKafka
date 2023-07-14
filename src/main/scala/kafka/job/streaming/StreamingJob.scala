@@ -3,7 +3,7 @@ package kafka.job.streaming
 import com.sg.wrapper.SparkSessionWrapper
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
 import org.apache.spark.sql.functions.{col, from_json, get_json_object, schema_of_json, sequence, when}
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType, DecimalType, TimestampType, BooleanType}
 import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 
 object StreamingJob extends App with SparkSessionWrapper {
@@ -33,7 +33,8 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
       StructField("investigation_type", StringType),
       StructField("accident_number", StringType),
       StructField("event_date", StringType),
-      StructField("location", StringType),
+      StructField("location_city", StringType),
+      StructField("location_state", StringType),
       StructField("country", StringType),
       StructField("latitude", StringType),
       StructField("longitude", StringType),
@@ -59,7 +60,7 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
       StructField("weather_condition", StringType),
       StructField("broad_phase_of_flight", StringType),
       StructField("report_status", StringType),
-      StructField("duplication_date", StringType)
+      StructField("publication_date", StringType)
     ))
 
     //Taking the data which we are interested.
@@ -87,19 +88,41 @@ class StreamingJobExecutor(spark: SparkSession, kafkaReaderConfig: KafkaReaderCo
       .option("checkpointLocation", checkpointLocation)
       .foreachBatch { (batchDF: DataFrame, _: Long) => {
         val df_1 = batchDF.select(
-          col("event_id"),
-          col("investigation_type"),
-          col("accident_number")
+          col("event_date").cast(TimestampType),
+          col("investigation_type").cast(StringType),
+          col("location_city").cast(StringType),
+          col("location_state").cast(StringType),
+          col("country").cast(StringType),
+          col("airport_code").cast(StringType),
+          col("airport_name").cast(StringType),
+          col("injury_severity").cast(StringType),
+          col("total_fatal_injuries").cast(IntegerType),
+          col("total_serious_injuries").cast(IntegerType),
+          col("total_minor_injuries").cast(IntegerType),
+          col("total_uninjured").cast(IntegerType),
+          col("weather_condition").cast(StringType),
+          col("broad_phase_of_flight").cast(StringType),
+          col("report_status").cast(StringType),
         )
 
         val df_2 = batchDF.select(
-          col("event_date"),
-          col("location"),
-          col("country")
+          col("event_date").cast(TimestampType),
+          col("investigation_type").cast(StringType),
+          col("injury_severity").cast(StringType),
+          col("total_fatal_injuries").cast(IntegerType),
+          col("total_serious_injuries").cast(IntegerType),
+          col("total_minor_injuries").cast(IntegerType),
+          col("total_uninjured").cast(IntegerType),
+          col("aircraft_damage").cast(StringType),
+          col("aircraft_category").cast(StringType),
+          col("registration_number").cast(StringType),
+          col("make").cast(StringType),
+          col("model").cast(StringType),
+          col("amateur_built").cast(StringType),
+          col("number_of_engines").cast(IntegerType),
+          col("engine_type").cast(StringType),
+          col("purpose_of_flight").cast(StringType),
         )
-
-
-
 
         df_1
           .write

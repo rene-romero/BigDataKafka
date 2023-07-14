@@ -17,24 +17,24 @@ import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 object KafkaCsvProducer {
   def main(args: Array[String]): Unit = {
     val config: Properties = new Properties()
-    config.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092") // Enter your own bootstrap server IP:PORT
+    config.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092")
     config.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
     config.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
 
     val producer: KafkaProducer[String, String] = new KafkaProducer[String, String](config)
 
-    // Enter your file name with path here
+    //file name with path
     val fileName = "src/main/resources/dataset/AviationData.csv"
 
-    // Enter your Kafka input topic name
+    //Kafka input topic name
     val topicName = "csv_to_mysql"
 
     for (line <- Source.fromFile(fileName).getLines().drop(1)) { // Dropping the column names
       // Extract Key
-      val key = line.split(",") {0}
+      val key = line.split(","){0}
 
       // Prepare the record to send
-      val record: ProducerRecord[String, String] = new ProducerRecord[String, String](topicName, 1, key, line)
+      val record: ProducerRecord[String, String] = new ProducerRecord[String, String](topicName, 1, key, line.replace("\"",""))
       //print("| " + line + " |\n")
       //print("| " + key(2) + " |\n")
 
