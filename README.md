@@ -10,7 +10,9 @@ The total columns to use are: **30 columns**
 
 **Observations:**  
 
-source profiles:    61% of the records of 'Latitude' are null.   
+Aviation Accident:           
+
+                    61% of the records of 'Latitude' are null.   
                     61% of the records of 'Longitude' are null.  
                     64% of the records of 'FAR.Description' are null.
                     86% of the records of 'Schedule' are null.  
