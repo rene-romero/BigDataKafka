@@ -25,7 +25,7 @@ For this pipeline we are using a total of: **97,405** records that will be sent 
 Link: [https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses]
 
 
-![Untitled](./img/1.png)
+![Untitled](./img/1.PNG)
 
 
 ## Architeture of the Pipeline
