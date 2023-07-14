@@ -244,8 +244,3 @@ The third one, store the segmented data into Postgres SQL that was taken from ka
   }.start()
   .awaitTermination()
 ```
-
-=======
-# BigDataKafka
-Repository to build a Kafka Project.
->>>>>>> c28cb1a88f1e6fd5f1fe586a803e32030ca5d507
